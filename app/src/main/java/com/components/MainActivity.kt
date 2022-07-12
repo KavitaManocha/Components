@@ -55,11 +55,14 @@ class MainActivity : AppCompatActivity() {
 
     fun validateCard(view: View) {
         binding.tvUdyam.text = card_no
-//        if (card_no!!.matches(cardPattern.toRegex())) {
-//            Toast.makeText(applicationContext, "Valid Card Number", Toast.LENGTH_SHORT).show()
-//        } else {
-//            Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
-//        }
+        if (card_no!!.matches(cardPattern.toRegex())) {
+            Toast.makeText(applicationContext, "Valid Card Number", Toast.LENGTH_SHORT).show()
+        }else if(!card_no?.elementAt(8)!!.equals("-") ||!card_no?.get(11)!!.equals("-") ) {
+            Toast.makeText(applicationContext, "Separators already added", Toast.LENGTH_SHORT).show()
+        }
+        else {
+            Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
+        }
     }
 
 }
