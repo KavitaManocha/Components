@@ -6,13 +6,15 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.components.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private var card_no: String?=null
+    private var card_no: String? = null
+    private val cardPattern = "^[A-Z]{2}[ -][0-9]{1,2}(?: [A-Z])?(?: [A-Z]*)? [0-9]{4}\$"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.edtUdyamAadharNo.paintFlags = View.GONE
 //        card_no = binding.edtUdyamAadharNo.text.toString()
-        binding.edtUdyamAadharNo.addTextChangedListener(object :TextWatcher{
+        binding.edtUdyamAadharNo.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
@@ -31,18 +33,22 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun afterTextChanged(s: Editable?) {
-                if(!s.toString().startsWith("UDYAM-")){
+                if (!s.toString().startsWith("UDYAM-")) {
                     s!!.insert(0, "UDYAM-")
                 }
             }
 
         })
 
-        binding.btnValidate.setOnClickListener {
-//            binding.tvUdyam.text = card_no
+
+    }
+
+    fun validateCard(view: View) {
+        if (card_no!!.matches(cardPattern.toRegex())) {
+            Toast.makeText(applicationContext, "Valid Card Number", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
         }
-
-
     }
 
 }
