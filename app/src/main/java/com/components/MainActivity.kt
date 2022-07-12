@@ -30,25 +30,36 @@ class MainActivity : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 card_no = binding.edtUdyamAadharNo.text.toString()
+//                if (s?.get(7)!!.equals("-") || s?.get(10)!!.equals("-") ){
+//                    Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
+//                }
             }
 
             override fun afterTextChanged(s: Editable?) {
                 if (!s.toString().startsWith("UDYAM-")) {
                     s!!.insert(0, "UDYAM-")
-                }
-            }
+//                    s!!.insert(7,"-")
+//                    s!!.insert(10,"-")
 
+                }
+//                else if (binding.edtUdyamAadharNo.text.insert() === 8||binding.edtUdyamAadharNo.text.get(8)||card_no.indices === 8|| card_no.get(8)){
+//                    if (!s.toString().endsWith("-")) {
+//                        s?.append("-");
+//                    }
+//                }
+            }
         })
 
 
     }
 
     fun validateCard(view: View) {
-        if (card_no!!.matches(cardPattern.toRegex())) {
-            Toast.makeText(applicationContext, "Valid Card Number", Toast.LENGTH_SHORT).show()
-        } else {
-            Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
-        }
+        binding.tvUdyam.text = card_no
+//        if (card_no!!.matches(cardPattern.toRegex())) {
+//            Toast.makeText(applicationContext, "Valid Card Number", Toast.LENGTH_SHORT).show()
+//        } else {
+//            Toast.makeText(applicationContext, "Invalid Card Number", Toast.LENGTH_SHORT).show()
+//        }
     }
 
 }
